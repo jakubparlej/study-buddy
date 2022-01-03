@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/Button/Button";
-import { Wrapper } from "./UsersListItem.styles";
+import { Wrapper, Content, Name, Attendance } from "./UsersListItem.styles";
+import Average from "../../atoms/Average/Average";
 
 const UsersListItem = ({ userData: { average, name, attendance = "0%" } }) => {
   return (
     <Wrapper>
-      <div>{average}</div>
-      <div>
-        <p>{name}</p>
-        <p>{attendance}</p>
-      </div>
+      <Average average={average}></Average>
+      <Content>
+        <Name>{name}</Name>
+        <Attendance>Attendance: {attendance}</Attendance>
+      </Content>
       <Button />
     </Wrapper>
   );
@@ -18,7 +19,7 @@ const UsersListItem = ({ userData: { average, name, attendance = "0%" } }) => {
 
 UsersListItem.propTypes = {
   userData: PropTypes.shape({
-    average: PropTypes.string.isRequired,
+    average: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     attendance: PropTypes.string,
   }),
