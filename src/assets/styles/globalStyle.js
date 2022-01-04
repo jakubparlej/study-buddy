@@ -21,4 +21,9 @@ export const GlobalStyle = createGlobalStyle`
   a, button {
     font-family: 'Montserrat', sans-serif;
   }
+
+  a, a:visited {
+    color: none;
+    text-decoration: none;
+  }
 `;
