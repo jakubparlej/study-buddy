@@ -4,7 +4,11 @@ import Button from "../../atoms/Button/Button";
 import { Wrapper, Content, Name, Attendance } from "./UsersListItem.styles";
 import Average from "../../atoms/Average/Average";
 
-const UsersListItem = ({ userData: { average, name, attendance = "0%" } }) => {
+const UsersListItem = ({
+  deleteUser,
+  index,
+  userData: { average, name, attendance = "0%" },
+}) => {
   return (
     <Wrapper>
       <Average average={average}></Average>
@@ -12,7 +16,7 @@ const UsersListItem = ({ userData: { average, name, attendance = "0%" } }) => {
         <Name>{name}</Name>
         <Attendance>Attendance: {attendance}</Attendance>
       </Content>
-      <Button />
+      <Button onClick={() => deleteUser(name)} />
     </Wrapper>
   );
 };
