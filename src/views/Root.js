@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import UsersList from "../components/organisms/UsersList/UsersList";
-import { users as usersData } from "../data/users.js";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "../assets/styles/globalStyle";
-import { theme } from "../assets/styles/theme";
+import { GlobalStyle } from "assets/styles/GlobalStyle";
+import { theme } from "assets/styles/theme";
 import { Wrapper } from "./Root.styles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Form from "../components/organisms/Form/Form";
-import Menu from "../components/organisms/Menu/Menu";
+import { users as usersData } from "data/users";
+import MainTemplate from "components/templates/MainTemplate/MainTemplate";
+import AddUser from "views/AddUser";
+import Dashboard from "views/Dashboard";
 
 const initialFormState = {
   name: "",
@@ -25,6 +25,7 @@ const Root = () => {
   };
 
   const handleInputChange = (e) => {
+    console.log(formValues);
     setFormValues({
       ...formValues,
       [e.target.name]: e.target.value,
@@ -47,25 +48,26 @@ const Root = () => {
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Wrapper>
-          <Menu />
-          <Routes>
-            <Route
-              path="/add-user"
-              element={
-                <Form
-                  formValues={formValues}
-                  handleAddUser={handleAddUser}
-                  handleInputChange={handleInputChange}
-                />
-              }
-            ></Route>
-            <Route
-              path="/"
-              element={<UsersList deleteUser={deleteUser} users={users} />}
-            ></Route>
-          </Routes>
-        </Wrapper>
+        <MainTemplate>
+          <Wrapper>
+            <Routes>
+              <Route
+                path="/add-user"
+                element={
+                  <AddUser
+                    formValues={formValues}
+                    handleAddUser={handleAddUser}
+                    handleInputChange={handleInputChange}
+                  />
+                }
+              ></Route>
+              <Route
+                path="/"
+                element={<Dashboard deleteUser={deleteUser} users={users} />}
+              ></Route>
+            </Routes>
+          </Wrapper>
+        </MainTemplate>
       </ThemeProvider>
     </Router>
   );
